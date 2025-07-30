@@ -1,27 +1,175 @@
-html
-
+```html
 <!DOCTYPE html>
-
-<html>
-
+<html lang="de">
 <head>
-
-<meta charset="UTF-8" />
-
-<title>Black Sultan OS</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Black Sultan OS</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-
-<h1>Willkommen bei Black
-
-Sultan OS</h1>
-
-<p>Die neue Welt beginnt
-
-hier.</p>
-
+  <div id="app">
+    <header>
+      <img src="assets/logo.png" alt="Black Sultan Logo" class="logo" />
+      <h1>Black Sultan OS</h1>
+    </header>
+    <main>
+      <section id="chat-section">
+        <div id="chat-window"></div>
+        <input type="text" id="chat-input" placeholder="Schreib was..." autocomplete="off" />
+        <button id="send-btn">Senden</button>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
 </body>
-
 </html>
+```
+
+---
+
+
+
+```css
+body {
+  background-color: #121212;
+  color: #f0c419;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#app {
+  width: 90%;
+  max-width: 500px;
+  background: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 0 20px #f0c419;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+}
+
+header {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #f0c419;
+}
+
+.logo {
+[30.7., 07:13] G: width: 60px;
+  height: 60px;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+#chat-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#chat-window {
+  flex-grow: 1;
+  background: #222;
+  padding: 10px;
+  overflow-y: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: #f0c419;
+  font-size: 1rem;
+}
+
+#chat-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  background: #121212;
+  color: #f0c419;
+}
+
+#send-btn {
+  background: #f0c419;
+  color: #121212;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+#send-btn:hover {
+  background: #d4a10d;
+}
+```
+
+---
+
+*3. script.js*
+
+```js
+const chatWindow = document.getElementById('chat-window');
+const chatInput = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
+
+function appendMessage(sender, message) {
+  const msgDiv = document.createElement('div');
+  msgDiv.classList.add('message');
+  msgDiv.innerHTML = `<strong>sender:</strong>{message}`;
+  chatWindow.appendChild(msgDiv);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+[30.7., 07:13] G: // Simulierter KI-Responder (Hier kannst du dein echtes Backend anbinden)
+function simulateResponse(text) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("Black Sultan sagt: " + text.split('').reverse().join(''));
+    }, 1000);
+  });
+}
+
+async function sendMessage() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+  appendMessage('Du', text);
+  chatInput.value = '';
+  
+  const response = await simulateResponse(text);
+  appendMessage('Black Sultan', response);
+}
+
+sendBtn.addEventListener('click', sendMessage);
+chatInput.addEventListener('keypress', e => {
+  if (e.key === 'Enter') sendMessage();
+});
+```
+
+---
+
+*4. assets/logo.png*
+
+Du kannst ein einfaches schwarzes oder goldenes Logo als PNG speichern. Falls du keins hast, einfach eine kleine schwarze/goldene PNG (60x60 px) reinpacken oder das Logo weglassen.
+
+---
+
+*So geht’s weiter:*
+
+- Alle Dateien in einen Ordner packen, z.B. `black-sultan-os`
+- Diesen Ordner ZIPpen (rechte Maustaste → Komprimieren)
+- ZIP hochladen auf *netlify.com* oder *vercel.com* (neues Projekt, manuell deployen)
+- Fertig, du hast deine Web-App live!
+
+Sag Bescheid, wenn ich dir nochmal beim Hochladen helfen soll.  
+Dann geht das richtig ab. 💥
